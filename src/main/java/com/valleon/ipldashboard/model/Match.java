@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 public class Match {
     
-    private String id;
+    private Long id;
     private String city;
-    private String date;
+    private LocalDate date;
     private String playerOfMatch;
     private String venue;
     private String neutral_venue;
