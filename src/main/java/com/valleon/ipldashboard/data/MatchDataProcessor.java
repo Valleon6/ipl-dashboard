@@ -1,24 +1,31 @@
 package com.valleon.ipldashboard.data;
 
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
-public class MatchDataProcessor implements ItemProcessor<MatchInput, Person> {
+import com.valleon.ipldashboard.model.Match;
+
+
+public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
 
   private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
 
   @Override
-  public Person process(final Person person) throws Exception {
-    final String firstName = person.getFirstName().toUpperCase();
-    final String lastName = person.getLastName().toUpperCase();
+  public Match process(final MatchInput matchInput) throws Exception {
 
-    final Person transformedPerson = new Person(firstName, lastName);
+    Match match = new Match();
 
-    log.info("Converting (" + person + ") into (" + transformedPerson + ")");
+    match.setId(matchInput.getId());
+    match.setCity(matchInput.getCity());
 
-    return transformedPerson;
+    match.setDate(LocalDate.parse(matchInput.get);
+
+
+    return match;
   }
 
 }
