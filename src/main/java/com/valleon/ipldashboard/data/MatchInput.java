@@ -24,7 +24,6 @@ private String result_margin;
 private String eliminator;         
 private String method;               
 private String umpire1;         
-private String umpire2;        
-    
-
+private String umpire2;  
+ 
 }
