@@ -2,13 +2,16 @@ package com.valleon.ipldashboard.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Match {
-    
+    @Id
     private Long id;
     private String city;
     private LocalDate date;
