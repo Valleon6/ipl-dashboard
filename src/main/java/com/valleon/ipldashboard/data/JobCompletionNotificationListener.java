@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.EntityManager;
+
 
 
 
@@ -17,11 +19,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
   private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-  private final JdbcTemplate jdbcTemplate;
+  private final EntityManager em;
 
   @Autowired
-  public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+  public JobCompletionNotificationListener(EntityManager jdbcTemplate) {
+    this.em = em;
   }
 
   @Override
@@ -29,9 +31,12 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
     if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
       log.info("!!! JOB FINISHED! Time to verify the results");
 
-      jdbcTemplate.query("SELECT team1, team2, date FROM match",
-        (rs, row) -> "Team 1 " +  rs.getString(1) + rs.getString(2) + "Date" + rs.getString(3)
-      ).forEach(str -> System.out.println(str));
+      em.createQuery("select distinct m.team1, count(*) from Match m group by m.team1")
+      .getResultList()
+      .stream()
+      .map;
+
+     Map<String, Team> teamData = new HashMap<>();
     }
   }
 }
