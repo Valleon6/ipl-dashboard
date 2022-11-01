@@ -1,4 +1,5 @@
 package com.valleon.ipldashboard.data;
+import com.valleon.ipldashboard.model.Match;
 
 import javax.sql.DataSource;
 
@@ -19,7 +20,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import com.valleon.ipldashboard.model.Match;
 
 @Configuration
 @EnableBatchProcessing
