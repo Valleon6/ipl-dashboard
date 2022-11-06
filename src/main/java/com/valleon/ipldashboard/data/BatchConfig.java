@@ -8,7 +8,9 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
@@ -30,10 +32,10 @@ public class BatchConfig {
             "eliminator", "method", "umpire1", "umpire2" };
 
     @Autowired
-    public JobBuilderFactory jobBuilderFactory;
+    public JobBuilderFactory jobBuilder;
 
     @Autowired
-    public StepBuilderFactory stepBuilderFactory;
+    public StepBuilderFactory stepBuilder;
 
     @Bean
     public FlatFileItemReader<MatchInput> reader() {
@@ -62,7 +64,7 @@ public class BatchConfig {
 
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilderFactory
+        return jobBuilder
             .get("importUserJob")
             .incrementer(new RunIdIncrementer())
             .listener(listener)
@@ -73,8 +75,8 @@ public class BatchConfig {
 
     @Bean
     public Step step1(JdbcBatchItemWriter<Match> writer) {
-        return stepBuilderFactory
-            .get("step1")
+        return stepBuilder
+            // .get("step1")
             .<MatchInput, Match>chunk(10)
             .reader(reader())
             .processor(processor())
