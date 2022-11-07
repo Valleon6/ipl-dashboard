@@ -32,7 +32,7 @@ public class BatchConfig {
             "eliminator", "method", "umpire1", "umpire2" };
 
     @Autowired
-    public JobBuilderFactory jobBuilder;
+    public JobBuilderFactory jobBuilderFactory;
 
     @Autowired
     public StepBuilderFactory stepBuilder;
