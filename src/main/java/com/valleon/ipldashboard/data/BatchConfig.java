@@ -35,7 +35,7 @@ public class BatchConfig {
     public JobBuilderFactory jobBuilderFactory;
 
     @Autowired
-    public StepBuilderFactory stepBuilder;
+    public StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public FlatFileItemReader<MatchInput> reader() {
@@ -64,7 +64,7 @@ public class BatchConfig {
 
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilder
+        return jobBuilderFactory
             .get("importUserJob")
             .incrementer(new RunIdIncrementer())
             .listener(listener)
@@ -75,7 +75,7 @@ public class BatchConfig {
 
     @Bean
     public Step step1(JdbcBatchItemWriter<Match> writer) {
-        return stepBuilder
+        return stepBuilderFactory
             // .get("step1")
             .<MatchInput, Match>chunk(10)
             .reader(reader())
