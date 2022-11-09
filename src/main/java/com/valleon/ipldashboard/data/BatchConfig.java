@@ -76,8 +76,8 @@ public class BatchConfig {
     @Bean
     public Step step1(JdbcBatchItemWriter<Match> writer) {
         return stepBuilderFactory
-            // .get("step1")
-            .<MatchInput, Match>chunk(10)
+             .get("step1")
+            .<MatchInput, Match>chunk( 10)
             .reader(reader())
             .processor(processor())
             .writer(writer)
