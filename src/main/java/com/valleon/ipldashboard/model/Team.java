@@ -1,9 +1,12 @@
 package com.valleon.ipldashboard.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +31,8 @@ public class Team {
     private long totalMatches;
 
     private long totalWins;
+
+    @Transient
+    private List<Match> matches;
     
 }
